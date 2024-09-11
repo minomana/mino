@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Interactive Image Map</title>
+    <style>
+        img {
+            width: 100%;
+            height: auto;
+        }
+        .image-container {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        /* Fix for clicking accuracy */
+        map area {
+            cursor: pointer;
+        }
+    </style>
+    <!-- image-map-resizer 라이브러리 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-map-resizer/1.0.10/js/imageMapResizer.min.js"></script>
+</head>
+<body>
+    <h1></h1>
+
+    <!-- Main cover image with image map -->
+    <img src="https://github.com/minomana/mino/blob/main/Title(B).jpg?raw=true" usemap="#covermap" alt="Cover Image" id="main-image">
+
+    <map name="covermap">
+        <!-- 4 regions with links to images -->
+        <area shape="rect" coords="1,740,1107,1036" onclick="openPopup('http://www.koreasem.com/page/company.php')" alt="INTRODUCTION">
+        <area shape="rect" coords="1126,735,2326,1028" onclick="openPopup('http://www.koreasem.com/bbs/board.php?bo_table=product1')" alt="SEM">
+        <area shape="rect" coords="2341,739,3541,1032" onclick="openPopup('http://www.koreasem.com/page/analysis_1.php')" alt="CENTER">
+        <area shape="rect" coords="3569,776,4643,999" onclick="openPopup('http://www.koreasem.com/bbs/board.php?bo_table=product1&wr_id=16')" alt="ION">
+        <area shape="rect" coords="4275,508,4514,706" onclick="openPopup('https://www.linkedin.com/in/gsem-korea-7259a3314/')" alt="LINKEDIN">
+        <area shape="rect" coords="3540,2420,4474,2623" onclick="openPopup('http://koreasem.com/page/product_list.php')" alt="TITLE1">
+        <area shape="rect" coords="3259,504,3498,702" onclick="openPopup('http://www.koreasem.com/')" alt="HOME">
+        <area shape="rect" coords="3611,516,3850,714" onclick="openPopup('https://www.youtube.com/@user-uo8nj4gu9m')" alt="YOUTUBE">
+        <area shape="rect" coords="3952,500,4191,698" onclick="openPopup('https://blog.naver.com/newbeam0201')" alt="BLOG">
+        <area shape="rect" coords="4275,508,4514,706" onclick="openPopup('https://www.linkedin.com/in/gsem-korea-7259a3314/')" alt="LINKEDIN">
+        <area shape="rect" coords="626,6799,1753,7068" onclick="showImage('ciqtek')" alt="CIQTEK">
+        <area shape="rect" coords="2953,6805,4080,7074" onclick="showImage('mini')" alt="MINI">
+        <area shape="rect" coords="600,10608,1727,10877" onclick="showImage('center')" alt="CENTER">
+        <area shape="rect" coords="2940,10585,4067,10854" onclick="showImage('academy')" alt="ACADEMY">
+    </map>
+
+    <!-- CIQTEK image page with internal link to company website -->
+    <div id="ciqtek" class="image-container">
+        <img src="https://github.com/minomana/mino/blob/main/CIQTEK(B).jpg?raw=true" usemap="#ciqtekmap" alt="CIQTEK Image">
+        <map name="ciqtekmap">
+            <area shape="rect" coords="4507,1960,3527,1730" onclick="openPopup('https://koreasem2.mycafe24.com/bbs/board.php?bo_table=product_2')" alt="Company Link">
+            <area shape="rect" coords="3162,13242,4310,13474" onclick="openPopup('http://www.koreasem.com/page/inquiry1.php')" alt="Company Link">
+        </map>
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    <!-- MINI image page with internal link to company website -->
+    <div id="mini" class="image-container">
+        <img src="https://github.com/minomana/mino/blob/main/MINI(B-1).jpg?raw=true" usemap="#minimap" alt="MINI Image">
+        <map name="minimap">
+            <area shape="rect" coords="4461,1962,3538,1752" onclick="openPopup('http://www.koreasem.com/bbs/board.php?bo_table=product1&wr_id=12&sca=%EC%A3%BC%EC%82%AC%EC%A0%84%EC%9E%90%ED%98%84%EB%AF%B8%EA%B2%BD')" alt="Company Link">
+        </map>
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    <!-- CENTER image page with internal link to company website -->
+    <div id="center" class="image-container">
+        <img src="https://github.com/minomana/mino/blob/main/CENTER(B).jpg?raw=true" usemap="#centermap" alt="CENTER Image">
+        <map name="centermap">
+            <area shape="rect" coords="3511,1723,4515,2011" onclick="openPopup('http://www.koreasem.com/page/analysis_1.php')" alt="Company Link">
+            <area shape="rect" coords="2977,12647,4138,12925" onclick="openPopup('http://www.koreasem.com/page/analysis_2.php')" alt="Company Link">
+        </map>
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    <!-- ACADEMY image page with download link -->
+    <div id="academy" class="image-container">
+        <img src="https://github.com/minomana/mino/blob/main/ACADEMY(B-1).jpg?raw=true" usemap="#academymap" alt="ACADEMY Image">
+        <map name="academymap">
+            <area shape="rect" coords="3334,6546,4490,6793" onclick="openPopup('https://github.com/minomana/mino/blob/main/APPLICATION.jpg?raw=true')" download="APPLICATION.jpg" alt="Download Image">
+            <area shape="rect" coords="4478,1969,3513,1753" onclick="openPopup('http://www.koreasem.com/bbs/board.php?bo_table=news&wr_id=40')" alt="Download Image">
+        </map>
+        <button onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function showImage(id) {
+            // Hide all images
+            var images = document.getElementsByClassName('image-container');
+            for (var i = 0; i < images.length; i++) {
+                images[i].classList.remove('active');
+            }
+
+            // Show the selected image
+            document.getElementById(id).classList.add('active');
+
+            // Hide the main image
+            document.getElementById('main-image').style.display = 'none';
+
+            // Ensure the image map resizes properly
+            imageMapResize();
+        }
+
+        function goBack() {
+            // Show the main image again
+            var images = document.getElementsByClassName('image-container');
+            for (var i = 0; i < images.length; i++) {
+                images[i].classList.remove('active');
+            }
+            document.getElementById('main-image').style.display = 'block';
+
+            // Ensure the image map resizes properly
+            imageMapResize();
+        }
+
+        function openPopup(url) {
+            window.open(url, '_blank', 'width=800,height=600');
+        }
+
+        // Call the imageMapResize function after the page loads
+        window.onload = function() {
+            // This will make the image map responsive
+            imageMapResize();
+        };
+    </script>
+
+</body>
+</html>
